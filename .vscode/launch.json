@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Train RL",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "diffusion_reward/scripts/train_drqv2_language.py",
+            "console": "integratedTerminal",
+            "args": ["task=blocktoblock64",
+                    "reward=diffusion_reward",
+                    "reward.expl_update_interval=1"],
+            "justMyCode": false
+        }
+    ]
+}
