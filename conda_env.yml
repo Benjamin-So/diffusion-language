@@ -41,7 +41,7 @@ dependencies:
       - charset-normalizer==3.0.1
       - chex==0.1.5
       - click==8.1.7
-      - clip==1.0
+      - clip @ git+https://github.com/openai/CLIP.git@3702849800aa56e2223035bccd1c6ef91c704ca8
       - cloudpickle==2.2.0
       - clu==0.0.8
       - colorama==0.4.5
