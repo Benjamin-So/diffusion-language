@@ -2,7 +2,7 @@ name: diffusion_reward
 channels:
   - defaults
 dependencies:
-  - python=3.8
+  - python=3.9.19
   - pip=21.1.3
   - numpy=1.19.2
   - absl-py=0.13.0
