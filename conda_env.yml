@@ -123,7 +123,7 @@ dependencies:
       - matplotlib==3.6.2
       - matplotlib-inline==0.1.6
       - mediapy==1.1.6
-      - metaworld==2.0.0
+      - install git+https://github.com/Farama-Foundation/Metaworld.git@master#egg=metaworld
       - mistune==2.0.4
       - ml-collections==0.1.1
       - more-itertools==10.3.0
