@@ -57,8 +57,8 @@ ipykernel==6.17.1
 ipython==8.7.0
 ipython-genutils==0.2.0
 ipywidgets==8.0.2
-jax==0.3.15
-jaxlib==0.3.15
+jax @ https://storage.googleapis.com/jax-releases/jax/jax-0.4.3.tar.gz
+jaxlib @ https://storage.googleapis.com/jax-releases/nocuda/jaxlib-0.4.3-cp39-cp39-manylinux2014_x86_64.whl
 jedi==0.18.2
 Jinja2==3.1.2
 jsonschema==4.17.1
