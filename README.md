@@ -35,7 +35,7 @@ cd ../..
 ## Set up Language_Table environment:
 ```
 cd language_table
-pip install -r ./requirements.txt
+pip install -r ./requirements_static.txt
 export PYTHONPATH=${PWD}:$PYTHONPATH
 ```
 ## Training
