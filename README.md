@@ -1,8 +1,8 @@
-# Diffusion Reward on Language Environment\
+# Diffusion Reward on Language Environment
 Set the Python Path in root directory
 ```
-cd diffusion_language \
-export PYTHONPATH=$PYTHONPATH:$(pwd)\
+cd diffusion_language
+export PYTHONPATH=$PYTHONPATH:$(pwd)
 ```
 ## Set up Diffusion_Reward environment:
 
