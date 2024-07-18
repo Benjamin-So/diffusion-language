@@ -171,7 +171,7 @@ class DrQV2Agent:
         else:
             action = dist.sample(clip=None)
             if step < self.num_expl_steps:
-                action.uniform_(-0.1, 0.1)
+                action.uniform_(-1.0, 1.0)
 
         return action.cpu().numpy()[0]
 

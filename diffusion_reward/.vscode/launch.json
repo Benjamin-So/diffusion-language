@@ -8,9 +8,9 @@
             "name": "Python: Train RL",
             "type": "debugpy",
             "request": "launch",
-            "program": "diffusion_reward/scripts/train_vqdiffusion.py",
+            "program": "scripts/train_vqdiffusion.py",
             "console": "integratedTerminal",
-            "args": ["dataset=language"],
+            "args": ["dataset=adroit"],
             "justMyCode": false
         }
     ]

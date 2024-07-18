@@ -430,6 +430,11 @@ class Solver(object):
             step_start = time.time()
             self.last_iter += 1
             loss = self.step(batch, phase='train')
+
+            # Sample images at regular intervals
+            if self.last_iter % self.sample_iterations == 0:
+                self.sample(batch, phase='train')
+
             # logging info
             if self.logger is not None and self.last_iter % self.args.log_frequency == 0:
                 info = '{}: train'.format(self.args.exp_name)
@@ -495,6 +500,10 @@ class Solver(object):
                 data_time = time.time() - itr_start
                 step_start = time.time()
                 loss = self.step(batch, phase='val')
+
+                # Sample images during validation
+                if itr % self.sample_iterations == 0:
+                    self.sample(batch, phase='val')
                 
                 for loss_n, loss_dict in loss.items():
                     loss[loss_n] = reduce_dict(loss_dict)
