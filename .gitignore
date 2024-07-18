@@ -1,3 +1,5 @@
 # Ignore checkpoints
 language_table/checkpoints/bc_resnet_sim_checkpoint_955000
 diffusion_reward/exp_local/rl
+*.pyc
+__pycache__/
