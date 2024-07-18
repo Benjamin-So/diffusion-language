@@ -25,7 +25,7 @@ from diffusion_reward.rl.drqv2.replay_buffer import (AMPBuffer,
 from diffusion_reward.rl.drqv2.video import TrainVideoRecorder, VideoRecorder
 from dm_env import specs
 
-
+import matplotlib.pyplot as plt
 
 torch.backends.cudnn.benchmark = True
 
@@ -146,7 +146,12 @@ class Workspace:
                     action = self.agent.act(time_step.observation,
                                             self.global_step,
                                             eval_mode=True)
+                    # print(action)
                 time_step = self.eval_env.step(action)
+                # obs = np.transpose(time_step.observation, (1, 2, 0))
+                # plt.imshow(obs)
+                # plt.axis('off')
+                # plt.show(block=True)
                 if self.pretrain_rm:
                     self.eval_replay_cache.add(time_step)
                 self.video_recorder.record(self.eval_env)

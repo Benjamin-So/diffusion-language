@@ -80,9 +80,6 @@ class LanguageWrapper(gym.Env):
         n_goal_achieved = 0
 
         for i_action in range(self._num_repeats): 
-            # time_step = self._env.step(action)
-            # succeeded = self._env.succeeded
-            # step_type = time_step.step_type
 
             obs, reward, done, env_info = self._env.step(action)
             succeeded = self._env.succeeded

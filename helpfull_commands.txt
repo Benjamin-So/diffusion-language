@@ -1,0 +1,9 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+obs = np.transpose(time_step.observation, (1, 2, 0))
+
+# Display the larger image
+plt.imshow(obs)
+plt.axis('off')  # Turn off axis numbers and ticks
+plt.show()
