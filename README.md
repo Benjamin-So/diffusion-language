@@ -21,16 +21,10 @@ Install extra dependencies.
 ```bash
 pip3 install torch==1.12.1+cu116 torchvision==0.13.1+cu116 --extra-index-url https://download.pytorch.org/whl/cu116
 ```
-- Install mujoco210 and mujoco-py following instructions [here](https://github.com/openai/mujoco-py#install-mujoco).
-
-- Install Adroit dependencies.
-```bash
-cd env_dependencies
-pip install -e mj_envs/.
-pip install -e mjrl/.
-cd ../..
+Hack to fix failed to initialize OpenGL error
 ```
-- Install MetaWorld following instructions [here](https://github.com/Farama-Foundation/Metaworld?tab=readme-ov-file#installation).
+unset LD_PRELOAD
+```
 
 ## Set up Language_Table environment:
 ```
