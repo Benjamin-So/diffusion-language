@@ -5,3 +5,4 @@ diffusion_reward/exp_local/rl
 __pycache__/
 train_drqv2_adroit_diffusion_reward_hammer.sh
 
+slurm*
