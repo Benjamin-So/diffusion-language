@@ -21,7 +21,7 @@ from dm_env import StepType, specs
 
 
 
-language_tasks = {'blocktoblock64', 'blocktoabsolute64'}
+language_tasks = {'blocktoblock64', 'blocktoabsolute64', 'greenStarToBlueCube'}
 
 class LanguageWrapper(gym.Env):
     """
@@ -154,7 +154,8 @@ class LanguageWrapper(gym.Env):
 def make(name, frame_stack, action_repeat, seed):
     rewards = {
         "blocktoblock64": block2block.BlockToBlockReward,
-        "blocktoabsolute64": block2absolutelocation.BlockToAbsoluteLocationReward
+        "blocktoabsolute64": block2absolutelocation.BlockToAbsoluteLocationReward,
+        "greenStarToBlueCube": block2block.BlockToBlockReward
     }
 
     # Hard coded values taken from language_table_resnet_sim_local.py
@@ -168,6 +169,7 @@ def make(name, frame_stack, action_repeat, seed):
         block_mode=blocks.LanguageTableBlockVariants.BLOCK_8,
         reward_factory=rewards[name],
         render_text_in_image=False,
+        control_frequency= 20,
         seed=seed)
     # env = gym_wrapper.GymWrapper(env)
     # env = env_wrappers.ClipTokenWrapper(env)

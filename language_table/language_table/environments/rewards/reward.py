@@ -60,8 +60,11 @@ class LanguageTableReward(object):
 
   def _sample_objects(self, blocks_on_table):
     """Randomly sample two objects."""
-    start_block, target_block = self._rng.choice(
-        blocks_on_table, 2, replace=False)
+    # start_block, target_block = self._rng.choice(
+    #     blocks_on_table, 2, replace=False)
+
+    start_block = np.str_('green_star')
+    target_block = np.str_('blue_cube')
     return start_block, target_block
 
 

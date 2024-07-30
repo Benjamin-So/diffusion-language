@@ -48,4 +48,4 @@ use_rm: true
 
 hydra:
   run:
-    dir: diffusion_reward/exp_local/rl/${now:%Y.%m.%d}/${task_name}/${reward.rm_model}/${exp_name}_${seed}
+    dir: exp_local/rl/${now:%Y.%m.%d}/${task_name}/${reward.rm_model}/${exp_name}_${seed}

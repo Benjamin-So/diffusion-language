@@ -20,7 +20,7 @@ skip_step: 9
 noise: true
 num_sample: 1
 noise_scale: 1
-use_std: true
+use_std: false
 
 # exploration reward
 use_expl_reward: true

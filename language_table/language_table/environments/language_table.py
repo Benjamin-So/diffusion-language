@@ -932,6 +932,7 @@ class LanguageTable(gym.Env):
 
   def _reset_poses_fixed(self, blocks_on_table):
     self._pybullet_client.restoreState(self._saved_state)
+    # TODO(oars): Seems like restoreState doesn't clear JointMotorControl.
 
     # Move the visible blocks off board for a bit while resetting end
     # effector.
@@ -945,14 +946,24 @@ class LanguageTable(gym.Env):
     # Step simulation to move blocks out of the way.
     self._step_simulation_to_stabilize()
 
-    # Fixed robot start pose:
-    robot_translation= [0.26970108, 0.14482413, 0.145]
     rotation = transform.Rotation.from_rotvec([0, math.pi, 0])
+    robot_translation = [0.38915592, 0.09674914, constants.EFFECTOR_HEIGHT]
     starting_pose = Pose3d(rotation=rotation, translation=robot_translation)
     self._set_robot_target_effector_pose(starting_pose)
     # Step simulation to move arm in place.
     self._step_simulation_to_stabilize()
 
+    # Define visible block poses
+    visible_poses = {4: ([0.3880161230691001, -0.034324802217228445, 0.0], (0.1377596723088827, 0.6935576923986564, 0.6935576923986565, 0.13775967230888272)), 
+                                            7: ([0.48861417022680315, 0.20846277712126277, 0.0], (-0.5610644546575305, 0.4303564542560596, 0.4303564542560597, -0.5610644546575306)),
+                                            8: ([0.3833795267283423, 0.03059283466783197, 0.0], (0.6895716397496188, 0.15649585826155885, 0.15649585826155887, 0.6895716397496189)),
+                                            9: ([0.2552674969134468, -0.21570980851082955, 0.0], (-0.5422159778819338, 0.45387424836571, 0.4538742483657101, -0.5422159778819339)),
+                                            17: ([0.45635346112307207, -0.17162381812932762, 0.0], (0.6366022148303696, 0.3077947694049849, 0.30779476940498496, 0.6366022148303697)),
+                                            18: ([0.5039539859443793, 0.009823005458832218, 0.0], (0.4766213984004727, 0.5223332677388812, 0.5223332677388813, 0.4766213984004728)),
+                                            14: ([0.4545277699359228, -0.019714810635439783, 0.0], (0.7058751718457797, 0.04171620514489421, 0.041716205144894214, 0.7058751718457799)),
+                                            15: ([0.42772788674001017, -0.06316524790202582, 0.0], (-0.411358291737288, 0.5751385535842474, 0.5751385535842475, -0.41135829173728805))
+                                            }
+    
     # Get the list of "visible" blocks and "invisible" blocks on table.
     visible_block_ids = [self._block_to_pybullet_id[i] for i in blocks_on_table]
     invisible_block_ids = [
@@ -966,46 +977,26 @@ class LanguageTable(gym.Env):
       self._pybullet_client.resetBasePositionAndOrientation(
           block_id, far_translation.tolist(),
           far_rotation.as_quat().tolist())
-      
-    visible_poses = {4: ([0.37828250493847226, -0.12394706377295722, 0.0], (-0.6418669975203303, 0.2966593290193927, 0.29665932901939274, -0.6418669975203303)), 
-                     7: ([0.5121466518167078, 0.20719126226512485, 0.0], (-0.5363113852085213, 0.4608363029273161, 0.4608363029273162, -0.5363113852085214)), 
-                     8: ([0.32661209408830616, -0.18833681506139666, 0.0], (0.5271134847924905, 0.4713293690721138, 0.47132936907211387, 0.5271134847924906)), 
-                     9: ([0.26842141407981507, -0.20077913906864336, 0.0], (0.7066511563165229, 0.025379977866836333, 0.02537997786683634, 0.706651156316523)), 
-                     17: ([0.4534684170658051, -0.15873278822799136, 0.0], (0.6792756734293378, 0.1964295280428063, 0.19642952804280633, 0.6792756734293379)), 
-                     18: ([0.4248938641326352, -0.11448290245016099, 0.0], (-0.12675259311996656, 0.6956534914290046, 0.6956534914290047, -0.1267525931199666)), 
-                     14: ([0.4795598404103502, 0.10207910051501318, 0.0], (0.6476352968169814, 0.28384594821272385, 0.2838459482127239, 0.6476352968169815)), 
-                     15: ([0.2460585529221474, -0.08920125393736825, 0.0], (0.09712315703871538, 0.7004049488451899, 0.70040494884519, 0.0971231570387154))}
-
-    num_reward_attempts = 0  # 20 tries to find a valid reward.
-    max_num_reward_attempts = 20
-
 
     # Next find locations for the "visible" blocks on the board.
-    while True:
-      for block_id in visible_block_ids:
-        translation, rotation = visible_poses[block_id]
-        self._pybullet_client.resetBasePositionAndOrientation(block_id, translation, rotation)
+    for block_id in visible_block_ids:
+      translation, rotation = visible_poses[block_id]
+      self._pybullet_client.resetBasePositionAndOrientation(block_id, translation, rotation)
 
-      self._step_simulation_to_stabilize(nsteps=200)
+    self._step_simulation_to_stabilize(nsteps=200)
 
-      if self._reward_calculator is not None:
+    # assess whether the randomly generated configuration of block poses is suitable for the task
+    if self._reward_calculator is not None:
         info = self._reward_calculator.reset(
             self._compute_state(request_task_update=False),
-            # Define an instruction over just
-            # these blocks.
+            # Define an instruction over just these blocks.
             blocks_on_table=blocks_on_table)
         if info == task_info.FAILURE:
-          # Try again with a new configuration of blocks.
-          continue
+            # Try again with a new configuration of blocks.
+              raise Exception("Sorry, this fixed configuration is not suitable for your task")
         self._set_task_info(info)
-        num_reward_attempts += 1
         if self._instruction_str is None:
-          if num_reward_attempts >= max_num_reward_attempts:
             raise ValueError('Cannot find a block config with valid reward.')
-          continue  # Try again with a new configuration of blocks.
-      break 
-    
-
 
 
   def _construct_invisible_walls(self):

@@ -1,0 +1,4 @@
+domain: language
+task_name: greenStarToBlueCube
+num_train_frames: 15000000
+stddev_schedule: 'linear(0.1,0.01,3000000)'

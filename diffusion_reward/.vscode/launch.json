@@ -8,9 +8,9 @@
             "name": "Python: Train RL",
             "type": "debugpy",
             "request": "launch",
-            "program": "scripts/train_vqdiffusion.py",
+            "program": "scripts/train_drqv2_language.py",
             "console": "integratedTerminal",
-            "args": ["dataset=adroit"],
+            "args": ["task=greenStarToBlueCube", "reward=diffusion_reward"],
             "justMyCode": false
         }
     ]

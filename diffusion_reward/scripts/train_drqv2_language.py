@@ -146,7 +146,6 @@ class Workspace:
                     action = self.agent.act(time_step.observation,
                                             self.global_step,
                                             eval_mode=True)
-                    # print(action)
                 time_step = self.eval_env.step(action)
                 # obs = np.transpose(time_step.observation, (1, 2, 0))
                 # plt.imshow(obs)
