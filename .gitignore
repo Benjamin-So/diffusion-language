@@ -4,5 +4,6 @@ diffusion_reward/exp_local/rl
 *.pyc
 __pycache__/
 train_drqv2_adroit_diffusion_reward_hammer.sh
-
+interactive_setup.sh
+seven_demos.sh
 slurm*
