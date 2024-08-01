@@ -53,7 +53,7 @@ class VQGAN(nn.Module):
     def load_checkpoint(self, path):
         print("trying to load model from :", str(path))
         if torch.cuda.is_available():
-            print("we found a gpu")
+            print("we found a gpu trying to load the vq_gan")
             print("the device count is ", torch.cuda.device_count())
 
         self.load_state_dict(torch.load(path))

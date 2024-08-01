@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "scripts/train_drqv2_language.py",
             "console": "integratedTerminal",
-            "args": ["task=greenStarToBlueCube", "reward=diffusion_reward"],
+            "args": ["task=greenStarToBlueCube", "reward=diffusion_reward_likelihood"],
             "justMyCode": false
         }
     ]
