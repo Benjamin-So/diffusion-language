@@ -1,4 +1,7 @@
 # Diffusion Reward on Language Environment
+
+This repository implements the Diffusion Reward pipeline on the language table environment. My main findings are highlighted below:
+
 Set the Python Path in root directory
 ```
 cd diffusion_language
