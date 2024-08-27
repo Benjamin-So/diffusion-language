@@ -1,6 +1,6 @@
 # Diffusion Reward on Language Environment
 
-This repository implements the Diffusion Reward pipeline on the language table environment. My main findings are highlighted below:
+This repository implements the Diffusion Reward pipeline on the Google Language Table environment
 
 Set the Python Path in root directory
 ```
